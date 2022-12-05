@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing simpler way</title>
+</head>
+
+<body>
+
+    <button id="btn">Click me</button>
+
+    <script>
+
+        function onButtonClick() {
+            console.log('clicked');
+
+        }
+
+        let timer;
+        function debounce(fn,delay){
+            clearTimeout(timer)
+            timer = setTimeout(onButtonClick,delay)
+        }
+
+        let btn = document.getElementById('btn');
+        btn.addEventListener('click', ()=> {
+            debounce(onButtonClick,3000)
+        });
+
+    </script>
+</body>
+
+</html>

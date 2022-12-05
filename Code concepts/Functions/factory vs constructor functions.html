@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory vs Constructor functions</title>
+</head>
+
+<body>
+    <h1>Factory Vs Constructor Functions✔</h1>
+    <script>
+        //Factory functions
+
+        function personFactory(name) {
+            return {
+                personName: name,
+                getName() {
+                    return `hey this is ${this.personName}`;
+
+                }
+            }
+        }
+
+
+        let fac1 = personFactory('mani');
+        let fac2 = personFactory('qoli');
+
+
+        //Trying to change the existing logic of getName function
+
+        fac1.getName = function () {
+            return `hola, I'm ${this.name}`;
+
+        }
+
+
+        //this changes only fac1..you need to do the same for all the objects.
+        console.log(fac1.getName());
+        console.log(fac2.getName());
+
+
+        /* --------- WORK AROUND SOLUTION TO FIX THAT ISSUE AND MODIFY IT AT PLACE --------*/
+
+
+
+        //Factory function susing Object.create
+
+        let obj = {
+
+            getName() {
+                return this.personName
+
+            }
+        }
+
+        //object.create takes an prototype of an object and creates an object with same prototype
+
+        function personFactoryUsingAssign(name) {
+            let obj1 = Object.create(obj, {
+                personName: {
+                    value: name
+                }
+            })
+
+            return obj1
+
+
+        }
+
+        // Notice this time properties and getname function of facUsingAssign1 and facUsingAssign2 will be attached to the prototype
+
+
+        let facUsingAssign1 = personFactoryUsingAssign('user1');
+        let facUsingAssign2 = personFactoryUsingAssign('user2');
+
+        //So you modify the proto which is same for all the instance objects.
+        // So if you change the logic at one place, That changes the logic for everyother object.
+
+
+        facUsingAssign1.__proto__.getName = function () {
+            return 'unknown'
+
+        }
+
+        /* This doesn't work like constructor functions */
+
+        // personFactoryUsingAssign.prototype.getName = function () {
+        //    return 'unknown'
+
+        // }
+
+
+
+        console.log(facUsingAssign1.getName());
+        console.log(facUsingAssign2);
+
+
+
+        //Constructor functions
+
+        function PersonConstructor(name) {
+            this.personName = name
+
+            /* If you add the getName function here itself without using prototype, this behaves same just like factory functions - 
+            like the function doesn't get attached to prototype and changing at one place doesn't change others*/
+            // ,
+            this.getName = function () {
+                return `hey this is ${this.personName}`;
+
+            }
+        }
+
+        let cons1 = new PersonConstructor('seri');
+        let cons2 = new PersonConstructor('suno');
+        console.log(cons1);
+
+
+
+        // PersonConstructor.prototype.getName = function (){
+        //     return `hola, I'm ${this.personName}`;
+        // }
+
+
+        /* Well changing the proto of one instance changes others as well */
+        cons1.__proto__.getName = function () {
+            return 'unknwon'
+        }
+
+        console.log(cons1.getName());
+        console.log(cons2.getName());
+
+
+
+        /** DATA PRIVACY **/
+
+        /* If you try to access the name property that you been utilizing, you can't do it, It's hidden from you, 
+        you can't find it anywhere on the proto or anywhere. this is something called data privacy with factory function
+        but constructor functions on other hand don't have that */
+
+
+        //Factory func
+        console.log('dataPrivacy', fac1.name);
+
+        //constructor func
+        console.log('non data privacy', cons1.name);
+
+
+
+        /** DEALING WITH THIS AND NEW KEYWORD **/
+
+        /* Factory functions are a bit simple you don't need to deal with this or new keyword*/
+
+
+        /*WORKAROUND SOLUTIONS*/
+
+
+
+
+    </script>
+</body>
+
+</html>

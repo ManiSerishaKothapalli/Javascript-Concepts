@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructor functions</title>
+</head>
+<body>
+    <script>
+        function Student(name,age){
+            this.name=name,
+            this.age=age,
+
+//You can't use functions without assigning to variable in constructor functions
+            this.details = () => {
+                return `He is ${this.name} with age ${this.age}`
+            }
+        }
+
+        let student1 = new Student("john",22)
+        console.log(student1.details());
+
+
+        //Parse converts text to json -Make sure that we pass text (place object between quotes)
+        const obj = JSON.parse('{"name":"John", "age":30, "city":"New York"}');
+        console.log(obj);
+        
+        
+    </script>
+</body>
+</html>

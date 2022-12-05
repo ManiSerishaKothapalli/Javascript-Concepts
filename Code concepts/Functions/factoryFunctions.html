@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Functions</title>
+</head>
+
+<body>
+    <script>
+        /*      
+              //using object literal
+              let mani = {
+                  name: 'Mani',
+                  designation: 'Developer',
+                  showInfo() {
+                      return this.name + ' is a ' + this.designation;
+                  }
+              };
+              let ben = {
+                  name: 'Ben',
+                  designation: 'Designer',
+                  showInfo() {
+                      return this.name + ' is a ' + this.designation;
+                  }
+              };
+      
+              // console.log(mani);
+      */
+        //using factory function
+
+/*
+        function createEmployee1(employeeName, employeeDesignation) {
+            return {
+                name: employeeName,
+                designation: employeeDesignation,
+                greet() {
+                    return `Hi I'm ${this.name} and I am ${this.designation} `
+                }
+
+            }
+
+        }
+
+
+        let mani = createEmployee1('Mani', 'Developer');
+        let ben = createEmployee1('Ben', 'Designer');
+        mani.greet = function () {
+            return `Hello,A warm Welcome to you, I'm ${this.name} and I am ${this.designation} `
+        }
+        console.log(mani.greet());
+        console.log(ben.greet());
+
+*/
+
+        //using object.assign
+
+      
+                const greet = {
+                    greet() {
+                        return `Hi I'm ${this.name} and I am ${this.designation} `
+                    }
+                }
+        
+                function createEmployee2(employeeName, employeeDesignation) {
+                    let employee = Object.create(greet);
+                    employee.name = employeeName;
+                    employee.designation = employeeDesignation;
+                    console.log(employee);
+                    return employee
+        
+                }
+        
+                let mani = createEmployee2('Mani', 'Developer');
+                let ben = createEmployee2('Ben', 'Designer');
+        
+                mani.__proto__.greet = function () {
+                    return `Hello, A warm Welcome to you, I'm ${this.name} and I am ${this.designation} `
+                }
+                console.log(mani.greet());
+                console.log(ben.greet());
+        
+        
+        
+        
+        
+     
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

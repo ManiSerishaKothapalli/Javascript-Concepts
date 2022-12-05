@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Cloning</title>
+</head>
+<body>
+    
+    <script>
+        let userDetails = {
+            name:'Mani',
+            address: {
+                Country: 'India'
+            }
+        }
+
+        let userDetails1 = {
+            name:'Mani',
+            address: {
+                Country: 'India',
+                street: 'hanik street'
+            },
+            message : () => {
+                console.log(`${this.name} is from ${this.address.Country}`);
+                
+            }
+        }
+
+
+
+        let clonedUserDetails =  structuredClone(userDetails1);
+        userDetails.name = 'Serisha'
+        userDetails.address.Country = 'UK'
+        console.log(clonedUserDetails); 
+        //{ "name": "Mani", "address": {"Country": "India"} }
+
+
+    </script>
+</body>
+</html>

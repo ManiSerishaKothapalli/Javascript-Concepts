@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this keyword</title>
+</head>
+
+<body>
+    <h1>This Keyword✔</h1>
+
+    <Script>
+
+        console.log(this);
+
+        //Rgular functions
+        function regularFunc() {
+            console.log(this);
+
+        }
+        regularFunc();
+
+        //Function expression
+
+        let funcExpression = function () {
+            console.log(this);
+
+        }
+
+        funcExpression();
+
+
+        //iife
+
+        (function () {
+            console.log(this);
+
+        })()
+
+
+        //named function xpression
+
+        let namedfuncExprssion = function fe() {
+            console.log(this);
+
+        }
+
+        namedfuncExprssion();
+
+
+        //Constructor functions
+        function ConstructorFunc(name) {
+            this.name = name;
+            this.getName = function () {
+                console.log(this);
+                console.log(this.name);
+            }
+
+            return this
+        }
+
+        let cons1 =  ConstructorFunc('mani');
+        console.log(cons1.getName());
+        
+
+
+        //factory functions
+
+        function factoryFunc() {
+            return {
+                name: 'mani',
+                getName: function () {
+                    console.log(this);
+                    console.log(this.name);
+
+                }
+            }
+        }
+
+        let fac1 = factoryFunc();
+        fac1.getName();
+
+
+
+        // ---------------------ARROW FUNCTIONS----------------------
+
+        //arrow functions
+        const arrowFunc = () => {
+            console.log(this);
+
+        }
+        arrowFunc();
+
+
+        let arrowobj = {
+            name: 'mani',
+            getName: function () {
+              return () => {
+                    console.log(this);
+                }
+
+            }
+        }
+
+    arrowobj.getName();
+
+
+
+
+
+        let obj1 = {
+            name: 'mani',
+            getName: function() {
+                console.log(this);
+                console.log(this.name);
+            }
+
+        }
+
+         let Emp_name = obj1.getName;
+        
+
+         Emp_name()
+
+
+        let obj = {
+            name: 'mani',
+            regularFunc,
+            method() {
+                console.log('method Inside Object', this.name);
+            },
+            methodreg: function () {
+                console.log('regular func method inside object', this);
+
+            },
+            arrowfunc: () => {
+                console.log('method as arrow func', this);
+
+            },
+            withCallbackFunc: function (callback) {
+                console.log(this);
+
+                setTimeout(function () {
+                    console.log(this);
+
+                }, 1000)
+                // callback();
+            }
+        }
+
+        obj.method();
+        obj.regularFunc()
+        obj.arrowfunc();
+        obj.methodreg();
+        let a = obj.method;
+        a();
+        obj.withCallbackFunc(regularFunc);
+
+    </Script>
+</body>
+
+</html>

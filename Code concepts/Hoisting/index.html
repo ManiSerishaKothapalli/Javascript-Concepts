@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoisting</title>
+</head>
+<body>
+    
+
+    <script>
+
+/* This prints undefined because only declaration will be moved to top and it will be intialized with undefined.*/
+        function printsUndefined(){
+            console.log(a);
+            a=5;
+            var a;
+        }
+
+        printsUndefined();
+
+/* This prints the number 5 because we have intialized it and then printed. 
+here in the first line the declaration will be moved to top and then it has been intialized and we print it*/   
+
+
+        function printsNumber(){
+            b=5;
+            console.log(b);         
+            let b; 
+        }
+    
+        printsNumber()
+    </script>
+</body>
+</html>

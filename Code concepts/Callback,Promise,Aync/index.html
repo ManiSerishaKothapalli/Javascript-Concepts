@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async programming</title>
+</head>
+
+<body>
+    <h1>Call Back Vs Promise Vs Aync & Await</h1>
+    <script>
+
+        /*  ----------------CALLBACK EXAMPLE -------------------------
+        1) Add items to cart
+        2)Checkout the items
+        3)Apply coupoun
+        4)make payment
+        5)Order summary
+        
+        All these actions are intedependent and can't be done unless it completes the previous one
+        */
+
+        function addItemstoCart(items, checkoutCb) {
+            setTimeout(() => {
+                let totalItems = items.length;
+                console.log(`${totalItems} items added to the cart`);
+                checkoutCb(totalItems, discount);
+            }, 1000);
+
+        }
+
+        function checkout(itemsInCart, discountCb) {
+            setTimeout(() => {
+                console.log(`checkout proceeded for ${itemsInCart} items! `);
+                discountCb(itemsInCart, payment);
+            }, 1000);
+
+        }
+
+        function discount(items, paymentCb) {
+            setTimeout(() => {
+                console.log('Apply coupon for ' + items + ' items');
+                paymentCb(items, orderSummary);
+            }, 1000);
+
+        }
+
+        function payment(items, orderSummaryCb) {
+            setTimeout(() => {
+                console.log('proceed to payment for ' + items + ' items');
+                orderSummaryCb(items);
+            }, 1000);
+
+        }
+
+        function orderSummary(items) {
+            setTimeout(() => {
+                console.log(`Order placed successfully for ${items} items`);
+            }, 1000)
+        }
+
+        // addItemstoCart(['shoes', 'clothes', 'glasses'], checkout)
+
+
+        /*----------------Promises EXAMPLE -------------------------
+                1)list veggies
+                2)Cut the vegetables
+                3)cook the veggies
+                4)serve it 
+                5)wash the dishes
+                
+        */
+
+        function listVeggies(veggies) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`Required veggies are ${veggies}`);
+                    resolve(veggies);
+                }, 1000);
+            })
+        }
+
+        function cutVeggies(veggies) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`Cut the ${veggies}`);
+                    resolve();
+                }, 1000);
+            })
+        }
+
+        function cookVeggies(veggies) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`Cooking the ${veggies.length} veggies like ${veggies}`);
+                    resolve();
+                }, 1000);
+
+            })
+        }
+
+        function serve(veggies) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`serve the cooked  veggies like ${veggies}`);
+                    resolve();
+                }, 1000);
+
+            })
+        }
+
+        function washingDishes() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`Cooking is done. Time to was dishes!`);
+                    resolve();
+                }, 1000);
+
+            })
+        }
+
+        let veggies = ['carrot', 'cucumber', 'beetroot']
+        // listVeggies(veggies).then((veggies) => {
+        //     return cutVeggies(veggies)  //we need to return the promise from here inorder to do promise chaining.
+        // }).then(() => {
+        //     return cookVeggies(veggies)
+        // }).then(() => {
+        //     return serve(veggies)
+        // }).then(() => {
+        //     return washingDishes();
+        // })
+
+        /*----------------Async Await EXAMPLE -------------------------
+
+                1)Gather content
+                2)Design the figma design template
+                3)Create a carousel with content
+                4)Publish in linkedin
+                5)Automate notification 
+                
+        */
+
+
+        function gatherContent(designTheme) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`Gather the content for linkedin ${designTheme}  post!`);
+                    resolve()
+                }, 1000);
+            })
+        }
+
+        function designTemplate(socialmediaType) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`Created a design for ${socialmediaType} type post`);
+                    let carouselSize = Math.floor(Math.random() * 11)
+                    resolve(carouselSize)
+                }, 1000);
+            })
+        }
+
+        function createCarousel(size) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`Created a carousel of ${size} slides`);
+                    let user = "Mani@gmail.com"
+                    resolve(user)
+                }, 1000);
+            })
+        }
+
+        function publishInLinkedIn(account) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`publish this carousel in ${account} account`);
+                    let followers = Math.floor(Math.random() * 10000);
+                    resolve(followers)
+                }, 1000);
+            })
+        }
+
+
+        function automateNotification(followers) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`Notification sent to ${followers} followers`);
+                    resolve();
+                }, 1000);
+            })
+        }
+
+
+        async function createPost() {
+            await gatherContent('dark theme');
+            let size = await designTemplate('LinkedIn');
+            let user = await createCarousel(size);
+            let followers = await publishInLinkedIn(user);
+            await automateNotification(followers);
+        }
+
+        createPost()
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Propagation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="grandparent"> grandparent
+        <div class="parent">parent
+            <div class="child">child</div>
+        </div>
+    </div>
+
+
+    <script>
+        let child = document.querySelector('.child');
+        let parent = document.querySelector('.parent');
+        let grandparent = document.querySelector('.grandparent');
+
+// Event Bubbling
+
+        child.addEventListener('click',(e)=> {
+            e.stopImmediatePropagation();
+            console.log('child1');
+            });
+
+        child.addEventListener('click',(e)=> {
+            e.stopImmediatePropagation();
+            console.log('child2');
+            });
+
+        parent.addEventListener('click',()=> console.log('parent'));
+        grandparent.addEventListener('click',()=> console.log('grandparent'));
+        
+
+
+// Event capturing
+
+        // child.addEventListener('click',()=> console.log('child'),true);
+        // parent.addEventListener('click',()=> console.log('parent'),true);
+        // grandparent.addEventListener('click',()=> console.log('grandparent'),true);
+
+// Event Bubbling and capturing
+
+        // grandparent.addEventListener('click',()=> console.log('grandparent'),false);
+        // parent.addEventListener('click',()=> console.log('parent'),true);
+        // child.addEventListener('click',()=> console.log('child'),true);
+
+    </script>
+</body>
+</html>

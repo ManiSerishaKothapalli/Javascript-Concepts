@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Delegation</title>
+    <style>
+        body{
+            display: flex;
+            height:100vh;
+            justify-content: center;
+            align-items: center;
+            /* background-color: #000;
+            color:#fff; */
+           
+        }
+        table,tr,td{
+            /* border: 1px solid #fff; */
+            border-collapse: collapse;
+            padding: 20px;
+            margin: auto;
+          
+        }
+        button{
+            background-color: #999;
+          
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+        }
+        ul{
+            border: 2px solid #0B86CA;
+            padding:30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <table>
+        <tr>
+            <td>Ravi</td>
+            <td><button>View Details</button></td>
+        </tr>
+        <tr>
+            <td>Serisha</td>
+            <td><button>View Details</button></td>
+        </tr>
+        <tr>
+            <td>Mani</td>
+            <td><button>View Details</button></td>
+        </tr>
+        <tr>
+            <td>Deepthi</td>
+            <td><button>View Details</button></td>
+        </tr>
+    </table> -->
+
+    <ul class="parent-list">
+        <li class="child-item">item1</li>
+        <li class="child-item">item2</li>
+        <li class="child-item">item3</li>
+        <li class="child-item">item4</li>
+        <li class="child-item">item5</li>
+    </ul>
+    <script>
+
+        let parent = document.getElementsByClassName('parent-list')[0];
+       
+            parent.addEventListener('click',(e) => {
+                if(e.target.nodeName == 'LI'){
+                    console.log(e.target.innerHTML);   
+                }
+                        
+            })
+        
+
+        // let ul = document.querySelector('ul')
+        // ul.addEventListener('click',(e) => {
+        //     console.log(e);
+            
+        // })
+    </script>
+</body>
+</html>

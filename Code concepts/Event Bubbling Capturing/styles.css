@@ -1,0 +1,23 @@
+div{
+    margin:auto;
+    margin-top: 50px;
+    border:2px solid orchid;
+    cursor: pointer;
+    font-size: 9px;
+}
+
+div.child{
+    width:50px;
+    height: 50px;
+    margin:auto;
+}
+div.parent{
+    width:100px;
+    height: 100px;
+    margin:auto;
+}
+div.grandparent{
+    width:150px;
+    height: 150px;
+    
+}

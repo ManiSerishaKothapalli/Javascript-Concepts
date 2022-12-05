@@ -1,0 +1,60 @@
+ES6 features that has evolved.
+
+1)Creation of objects using javascript classes
+2)Rest and spread operator
+3)Destructuring
+4)Arrow syntax
+5)import and export
+6)Template literals
+7)Default params 
+8)let and const
+9)Promises
+10)Multiline strings
+
+
+ES5 features to create object
+
+1)Constructor functions object creation
+
+
+1)Creation of objects using javascript classes: Classes has been introduced in ES6 like other
+Programming languages.But they work different, they are used to create objects in easy way and
+also can inherit other classes using extend.
+
+class Student{
+    constructor(name,age,rollnum){
+        this.name=name;
+        this.age=age;
+        this.rollnum=rollnum;
+    }
+
+
+    getname(){
+        console.log(this.name)
+    }
+}
+
+
+let student1 = new Student("seri",24,12)
+console.log(student1.name,student1.getname())
+
+
+2)Constructor functions object creation:
+function Student(name,age){
+            this.name=name,
+            this.age=age,
+
+//You can't use functions without assigning to variable in constructor functions
+            this.details = () => {
+                return `He is ${this.name} with age ${this.age}`
+            }
+        }
+
+        let student1 = new Student("john",22)
+        console.log(student1.details());
+
+DIFFERENCE BETWEEN CLASSES AND CONSTRUCTOR FUNCTIONS:
+_____________________________________________________
+
+1)One difference is that using constructor functions we can't use inheritance
+2)Adding functions to classes is bit more convinient.
