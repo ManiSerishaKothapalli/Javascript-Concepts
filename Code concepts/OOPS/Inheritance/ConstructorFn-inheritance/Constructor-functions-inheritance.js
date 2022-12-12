@@ -2,6 +2,7 @@ function Person(name, birthyear, gender) {
   this.name = name;
   this.birthyear = birthyear;
   this.gender = gender;
+
 }
 
 Person.prototype.calcAge = function () {
